@@ -1,0 +1,437 @@
+{new_gh_panel
+   pause
+   (clear_vram TRUE)
+   (navigator
+      (vertical pause_resume.btn pause_restart.btn pause_options.btn pause_quit.btn))
+   (enter
+      {$this set_focus pause_resume.btn})}
+#define PAUSE_SCREEN_HANDLERS
+((allow_back FALSE)
+   (animate_transition FALSE)
+   (enter
+      {game set_paused TRUE}
+      {app set_paused TRUE})
+   (exit
+      {app set_paused FALSE})
+   (resume
+      {set $game_unpause_on_enter TRUE}
+      {ui goto_screen game}))
+{new_gh_screen
+   pause
+   (panels GAME_PANELS pause)
+   (focus pause)
+   (in_game TRUE)
+   PAUSE_SCREEN_HANDLERS
+   (SELECT_MSG
+      {switch
+         $component
+         (pause_resume.btn
+            {$this resume})
+         (pause_restart.btn
+            {synth stop_all_sfx}
+            {synth play_sequence button_play}
+            {game restart}
+            {ui goto_screen game})
+         (pause_options.btn
+            {ui goto_screen pause_settings})
+         (pause_quit.btn
+            {if
+               {==
+                  career
+                  {meta get mode}}
+               {meta set continue_screen sel_song}}
+            {meta_loading_goto
+               {meta get continue_screen}})})
+   (BUTTON_DOWN_MSG
+      {if
+         {== $button kPad_Start}
+         {$this resume}})}
+{new_gh_panel
+   overshell_prac
+   (clear_vram TRUE)
+   (navigator
+      (vertical spell_resum4.btn spell_resum3.btn spell_resum2.btn spell_resume.btn spell_restart.btn spell_options.btn spell_quit.btn spell_qui2.btn))
+   (enter
+      {spell_buttons.view set_local_scale 0.9 0 0.9}
+      {spell_buttons.view set_local_pos 0 0 -5}
+      {spell_title.lbl set_local_pos 0 0 120}
+      {spell_title.lbl set_local_scale 0.8 0 0.8}
+      {spell_title.lbl set_localized_text PRACTICE}
+      {spell_resum4.btn set_localized_text RESUME}
+      {spell_resum3.btn set_localized_text RESTART}
+      {spell_resum2.btn set_localized_text SET_A_POS}
+      {spell_resume.btn set_localized_text CLEAR_A_POS}
+      {spell_restart.btn set_localized_text FORWARD_30_SEC}
+      {spell_options.btn set_localized_text REWIND_30_SEC}
+      {spell_quit.btn set_localized_text SETTINGS}
+      {spell_qui2.btn set_localized_text QUIT}
+      {spell_qui3.btn
+         set_localized_text
+         ""}
+      {spell_qui4.btn
+         set_localized_text
+         ""}
+      {$this set_focus spell_resum4.btn})}
+{new_gh_screen
+   overshell_prac
+   (panels GAME_PANELS overshell_prac helpbar)
+   (focus overshell_prac)
+   (in_game TRUE)
+   PAUSE_SCREEN_HANDLERS
+   (SELECT_MSG
+      {switch
+         $component
+         (spell_resum4.btn
+            {$this resume})
+         (spell_resum3.btn
+            {synth stop_all_sfx}
+            {synth play_sequence button_play}
+            {ui goto_screen tut_loading})
+         (spell_resum2.btn
+            {set
+               $timeskip
+               {game ms}})
+         (spell_resume.btn
+            {set $timeskip 0})
+         (spell_restart.btn
+            {do
+               {set
+                  $timetoskipup
+                  {'+' $timetoskipup 30000}}
+               {set
+                  $timeskip
+                  {'+'
+                     {game ms}
+                     $timetoskipup}}
+               {set $dx_needssongreload TRUE}})
+         (spell_options.btn
+            {do
+               {if_else
+                  {>
+                     {-
+                        {game ms}
+                        $timetoskipdown}
+                     30000}
+                  {set
+                     $timetoskipdown
+                     {- $timetoskipdown 30000}}
+                  {if_else
+                     {&&
+                        {<
+                           {-
+                              {game ms}
+                              $timetoskipdown}
+                           30000}
+                        {>
+                           {-
+                              {game ms}
+                              $timetoskipdown}
+                           20000}}
+                     {set
+                        $timetoskipdown
+                        {- $timetoskipdown 10000}}
+                     {if
+                        {<
+                           {-
+                              {game ms}
+                              $timetoskipdown}
+                           20000}
+                        {set $timetoskipdown 0}}}}
+               {if_else
+                  {<
+                     {-
+                        {game ms}
+                        $timetoskipdown}
+                     10000}
+                  {set $timeskip 10000}
+                  {set
+                     $timeskip
+                     {-
+                        {game ms}
+                        $timetoskipdown}}}
+               {set $dx_needssongreload TRUE}})
+         (spell_quit.btn
+            {ui goto_screen settings_prac})
+         (spell_qui2.btn
+            {if
+               {==
+                  career
+                  {meta get mode}}
+               {meta set continue_screen career}}
+            {meta_loading_goto
+               {meta get continue_screen}}
+            {set $cheat_meter 0})
+         (spell_qui3.btn
+            {ui pop_screen})
+         (spell_qui4.btn
+            {ui pop_screen})})
+   (BUTTON_DOWN_MSG
+      {if
+         {== $button kPad_Start}
+         {$this resume}})}
+{func
+   meta_loading_goto
+   ($next_screen)
+   {{ui screen meta_loading}
+      set
+      next_screen
+      $next_screen}
+   {ui goto_screen meta_loading}}
+{new_panel
+   meta_loading
+   (enter
+      {animate_forever_30fps $this meta_loading.view})}
+{new_gh_screen
+   meta_loading
+   (panels meta_loading)
+   (allow_back FALSE)
+   (animate_transition FALSE)
+   (TRANSITION_COMPLETE_MSG
+      {autosave_goto
+         {$this get next_screen}})}
+{new_gh_panel
+   pause_controller
+   (clear_vram TRUE)
+   (focus pause_controller_resume.btn)
+   (enter
+      {pause_controller_msg.lbl
+         set_text
+         {if_else
+            {game multiplayer}
+            controller_loss_msg_multi
+            controller_loss_msg}})
+   (poll
+      {if_else
+         {game is_missing_controller}
+         {pause_controller_resume.btn set_state kDisabled}
+         {pause_controller_resume.btn set_state kFocused}})}
+{new_gh_screen
+   pause_controller
+   (panels GAME_PANELS pause_controller)
+   (focus pause_controller)
+   (in_game TRUE)
+   PAUSE_SCREEN_HANDLERS
+   (SELECT_MSG
+      {switch
+         $component
+         (pause_controller_resume.btn
+            {$this resume})})
+   (BUTTON_DOWN_MSG
+      {if_else
+         {game is_missing_controller}
+         TRUE
+         kDataUnhandled})}
+#define SLIDER_LEVELS
+(12)
+#define SETTINGS_PANEL_HANDLERS
+((focus gs_band.sld)
+   (finish_load
+      {gs_band.sld set_num_steps SLIDER_LEVELS}
+      {gs_guitar.sld set_num_steps SLIDER_LEVELS}
+      {gs_sfx.sld set_num_steps SLIDER_LEVELS})
+   (calc_slider_pos
+      ($volume)
+      {int
+         {'+'
+            0.5
+            {'*'
+               $volume
+               {- SLIDER_LEVELS 1}}}})
+   (reset_slider_pos
+      ($slider $volume)
+      {$slider
+         set_selected_pos
+         {$this calc_slider_pos $volume}})
+   (slider_changed
+      {'||'
+         {!=
+            {$this get orig_pos.band}
+            {gs_band.sld selected_pos}}
+         {!=
+            {$this get orig_pos.guit}
+            {gs_guitar.sld selected_pos}}
+         {!=
+            {$this get orig_pos.sfx}
+            {gs_sfx.sld selected_pos}}})
+   (enter
+      {$this
+         reset_slider_pos
+         gs_band.sld
+         {options get_band_volume}}
+      {$this
+         reset_slider_pos
+         gs_guitar.sld
+         {options get_guitar_volume}}
+      {$this
+         reset_slider_pos
+         gs_sfx.sld
+         {options get_fx_volume}}
+      {$this
+         set
+         orig_pos.band
+         {gs_band.sld selected_pos}}
+      {$this
+         set
+         orig_pos.guit
+         {gs_guitar.sld selected_pos}}
+      {$this
+         set
+         orig_pos.sfx
+         {gs_sfx.sld selected_pos}}
+      {gs_stereo.tog
+         set_state
+         {options get_stereo}}
+      {if
+         {$this has_lefty}
+         {gs_left_p1.tog
+            set_state
+            {options get_lefty 0}}
+         {gs_left_p2.tog
+            set_state
+            {options get_lefty 1}}})
+   (set_volumes
+      {if_else
+         {$this slider_changed}
+         {do
+            {options
+               set_band_volume
+               {$this get_slider_volume gs_band.sld}}
+            {options
+               set_guitar_volume
+               {$this get_slider_volume gs_guitar.sld}}
+            {options
+               set_fx_volume
+               {$this get_slider_volume gs_sfx.sld}}}
+         0})
+   (GH_CANCEL_MSG
+      {switch
+         $component
+         (gs_band.sld
+            {$this
+               reset_slider_pos
+               gs_band.sld
+               {$this get orig_vol}})
+         (gs_guitar.sld
+            {$this
+               reset_slider_pos
+               gs_guitar.sld
+               {$this get orig_vol}})
+         (gs_sfx.sld
+            {$this
+               reset_slider_pos
+               gs_sfx.sld
+               {$this get orig_vol}})})
+   (get_slider_volume
+      ($slider)
+      {/
+         {$slider selected_pos}
+         {- SLIDER_LEVELS 1}})
+   (FOCUS_MSG
+      {$this set focus_component $new_focus})
+   (poll
+      {if_else
+         {$this slider_selected}
+         {helpbar
+            set_display
+            ((fret1 help_confirm)
+               (fret2 help_cancel)
+               (strum help_adjvol))}
+         {do
+            {if_else
+               {'||'
+                  {==
+                     {$this get focus_component}
+                     gs_stereo.btn}
+                  {==
+                     {$this get focus_component}
+                     gs_left_p1.btn}
+                  {==
+                     {$this get focus_component}
+                     gs_left_p2.btn}}
+               {helpbar
+                  set_display
+                  ((fret1 help_onoff)
+                     (fret2 help_back)
+                     (strum help_updown))}
+               {helpbar
+                  set_display
+                  ((fret1 help_select)
+                     (fret2 help_back)
+                     (strum help_updown))}}}})
+   (SCROLL_START_MSG
+      {do
+         (($vol
+               {/
+                  {$component selected_pos}
+                  {- SLIDER_LEVELS 1}}))
+         {switch
+            $component
+            (gs_band.sld
+               {play_sfx
+                  slider_band
+                  (volume $vol)
+                  (stop TRUE)})
+            (gs_guitar.sld
+               {play_sfx
+                  slider_gtr
+                  (volume $vol)
+                  (stop TRUE)})
+            (gs_sfx.sld
+               {play_sfx
+                  slider_sfx
+                  (volume $vol)
+                  (stop TRUE)})}})
+   (SELECT_MSG
+      {switch
+         $component
+         (gs_band.sld
+            {$this
+               set
+               orig_vol
+               {$this get_slider_volume gs_band.sld}})
+         (gs_guitar.sld
+            {$this
+               set
+               orig_vol
+               {$this get_slider_volume gs_guitar.sld}})
+         (gs_sfx.sld
+            {$this
+               set
+               orig_vol
+               {$this get_slider_volume gs_sfx.sld}})
+         (gs_stereo.btn
+            {gs_stereo.tog toggle}
+            {options
+               set_stereo
+               {gs_stereo.tog get_state}})
+         (gs_left_p1.btn
+            {gs_left_p1.tog toggle}
+            {options
+               set_lefty
+               0
+               {gs_left_p1.tog get_state}})
+         (gs_left_p2.btn
+            {gs_left_p2.tog toggle}
+            {options
+               set_lefty
+               1
+               {gs_left_p2.tog get_state}})}
+      kDataUnhandled))
+{new_slider_panel
+   pause_settings
+   (navigator
+      (vertical gs_band.sld gs_guitar.sld gs_sfx.sld gs_stereo.btn))
+   (has_lefty FALSE)
+   SETTINGS_PANEL_HANDLERS}
+{new_gh_screen
+   settings_prac
+   (panels GAME_PANELS pause_settings helpbar)
+   (focus pause_settings)
+   (in_game TRUE)
+   (allow_back FALSE)
+   (animate_transition FALSE)
+   (BUTTON_DOWN_MSG
+      {if
+         {meta is_back_button $button $player_num}
+         {$this set_volumes}
+         {ui goto_screen overshell_prac}})}

@@ -1,0 +1,578 @@
+{new_gh_panel
+   main
+   (navigator
+      (vertical main_career.btn main_quickspin.btn main_multiplayer.btn main_tutorial.btn main_options.btn))
+   (focus main_career.btn)
+   (enter
+      {set $practicemode FALSE}
+      {set $main_entered TRUE}
+      {turn_off_ambient}
+      {$this reset_player_settings}
+      {tutorial set_tutorial_running FALSE}
+      {main_msg.view set_showing TRUE}
+      {$this set msg_last_frame 0})
+   (SELECT_MSG
+      {switch
+         $component
+         (main_career.btn
+            {ui goto_screen sel_song})
+         (main_quickspin.btn
+            {ui goto_screen multi_sel_character})
+         (main_multiplayer.btn
+            {set $practicemode TRUE}
+            {ui goto_screen qp_selsong})
+         (main_tutorial.btn
+            {ui push_screen overshell_main})
+         (main_options.btn
+            {ui goto_screen game_settings})})
+   (poll
+      {if_else
+         {game is_missing_multi_controller}
+         {$this disable_component main_multiplayer.btn}
+         {$this enable_component main_multiplayer.btn}}
+      {main_msg.view
+         set_showing
+         {<
+            {ui frame}
+            {$this get msg_last_frame}}})
+   (reset_player_settings
+      {set disable_save 1}
+      {campaign set_all_access 1}
+      {game set_difficulty kDifficultyExpert}
+      {game set_venue basement}
+      {game set_song_index 0}
+      {game set_character metal}
+      {game set_guitar_index 0}
+      {do
+         (($player2_config
+               {game get_player_config 1}))
+         {$player2_config set_character classic}
+         {$player2_config set_guitar_index 0}})
+   (display_msg
+      ($msg)
+      {mm_msg.lbl
+         set_localized_text
+         {sprintf
+            {localize main_cheat_msg_fmt}
+            {localize $msg}}}
+      {$this
+         set
+         msg_last_frame
+         {'+'
+            {ui frame}
+            5000}})}
+{new_gh_screen
+   main
+   (panels meta main helpbar char_multi)
+   (focus main)
+   (helpbar
+      (default
+         ((fret1 help_continue)
+            (strum help_updown))))
+   (access_all
+      {{ui panel main}
+         enable_component
+         main_career.btn}
+      {{ui panel main}
+         enable_component
+         main_quickspin.btn}
+      {{ui panel main}
+         enable_component
+         main_multiplayer.btn})}
+{new_gh_panel
+   overshell_main
+   (clear_vram TRUE)
+   (navigator
+      (vertical shell_resum4.btn shell_resum3.btn shell_resum2.btn shell_resume.btn shell_restart.btn shell_options.btn shell_quit.btn shell_qui2.btn shell_qui3.btn shell_qui4.btn))
+   (enter
+      {shell_buttons.view set_local_scale 1 0 1}
+      {shell_buttons.view set_local_pos 0 0 -25}
+      {shell_title.lbl set_local_pos 0 0 100}
+      {shell_title.lbl set_local_scale 0.75 0 0.75}
+      {$this reset}
+      {$this disable_component shell_qui4.btn}
+      {shell_qui4.btn set_showing FALSE}
+      {$this disable_component shell_qui3.btn}
+      {if_else
+         $disable_save
+         {shell_qui3.btn set_showing TRUE}
+         {shell_qui3.btn set_showing FALSE}}
+      {shell_title.lbl
+         set_localized_text
+         "MODIFIERS"}
+      {shell_resum4.btn
+         set_localized_text
+         "SET SPEEDS..."}
+      {shell_resum3.btn
+         set_localized_text
+         {if_else
+            {! $depthmilo}
+            "DEPTH OF FIELD: ON"
+            "DEPTH OF FIELD: OFF"}}
+      {shell_resum2.btn
+         set_localized_text
+         {if_else
+            $nofail
+            "NO FAIL: ON"
+            "NO FAIL: OFF"}}
+      {shell_resume.btn
+         set_localized_text
+         {if_else
+            $airtar
+            "AIR GUITAR: ON"
+            "AIR GUITAR: OFF"}}
+      {shell_restart.btn
+         set_localized_text
+         {if_else
+            $ghtar
+            "GH GUITAR: ON"
+            "GH GUITAR: OFF"}}
+      {shell_options.btn
+         set_localized_text
+         {if_else
+            $moncrowd
+            "MONKEY CROWD: ON"
+            "MONKEY CROWD: OFF"}}
+      {shell_quit.btn
+         set_localized_text
+         {if_else
+            $skucrowd
+            "SKULL CROWD: ON"
+            "SKULL CROWD: OFF"}}
+      {shell_qui2.btn
+         set_localized_text
+         {if_else
+            $dxuo
+            "AUTOPLAY"
+            "AUTOPLAY"}}
+      {$this set_focus shell_resum4.btn})}
+{new_gh_screen
+   overshell_main
+   (panels overshell_main)
+   (focus overshell_main)
+   (in_game FALSE)
+   (allow_back FALSE)
+   (animate_transition FALSE)
+   (SELECT_MSG
+      {switch
+         $component
+         (shell_resum4.btn
+            {ui push_screen slide_settings})
+         (shell_resum3.btn
+            {if_else
+               $depthmilo
+               {set $depthmilo FALSE}
+               {set $depthmilo TRUE}}
+            {do
+               {shell_resum3.btn
+                  set_localized_text
+                  {if_else
+                     {! $depthmilo}
+                     "DEPTH OF FIELD: ON"
+                     "DEPTH OF FIELD: OFF"}}
+               {$this reset}})
+         (shell_resum2.btn
+            {if_else
+               $nofail
+               {set $nofail FALSE}
+               {set $nofail TRUE}}
+            {do
+               {shell_resum2.btn
+                  set_localized_text
+                  {if_else
+                     $nofail
+                     "NO FAIL: ON"
+                     "NO FAIL: OFF"}}
+               {$this reset}})
+         (shell_resume.btn
+            {if_else
+               {== $cheat_guitar kGuitarAir}
+               {do
+                  {set $cheat_guitar 0}
+                  {shell_resume.btn
+                     set_localized_text
+                     "AIR GUITAR: OFF"}
+                  {set $airtar FALSE}
+                  {$this reset}}
+               {do
+                  {set $cheat_guitar kGuitarAir}
+                  {shell_resume.btn
+                     set_localized_text
+                     "AIR GUITAR: ON"}
+                  {set $airtar TRUE}
+                  {shell_restart.btn
+                     set_localized_text
+                     "GH GUITAR: OFF"}
+                  {set $ghtar FALSE}
+                  {$this reset}}})
+         (shell_restart.btn
+            {if_else
+               {== $cheat_guitar kGuitarRedOctane}
+               {do
+                  {set $cheat_guitar 0}
+                  {shell_restart.btn
+                     set_localized_text
+                     "GH GUITAR: OFF"}
+                  {set $ghtar FALSE}
+                  {$this reset}}
+               {do
+                  {set $cheat_guitar kGuitarRedOctane}
+                  {shell_restart.btn
+                     set_localized_text
+                     "GH GUITAR: ON"}
+                  {set $ghtar TRUE}
+                  {shell_resume.btn
+                     set_localized_text
+                     "AIR GUITAR: OFF"}
+                  {set $airtar FALSE}
+                  {$this reset}}})
+         (shell_options.btn
+            {if_else
+               {== $cheat_crowd 1}
+               {do
+                  {set $cheat_crowd 0}
+                  {shell_options.btn
+                     set_localized_text
+                     "MONKEY CROWD: OFF"}
+                  {set $moncrowd FALSE}
+                  {$this reset}}
+               {do
+                  {set $cheat_crowd 1}
+                  {shell_options.btn
+                     set_localized_text
+                     "MONKEY CROWD: ON"}
+                  {set $moncrowd TRUE}
+                  {shell_quit.btn
+                     set_localized_text
+                     "SKULL CROWD: OFF"}
+                  {set $skucrowd FALSE}
+                  {$this reset}}})
+         (shell_quit.btn
+            {if_else
+               {== $cheat_crowd 2}
+               {do
+                  {set $cheat_crowd 0}
+                  {shell_quit.btn
+                     set_localized_text
+                     "SKULL CROWD: OFF"}
+                  {set $skucrowd FALSE}
+                  {$this reset}}
+               {do
+                  {set $cheat_crowd 2}
+                  {shell_quit.btn
+                     set_localized_text
+                     "SKULL CROWD: ON"}
+                  {set $skucrowd TRUE}
+                  {shell_options.btn
+                     set_localized_text
+                     "MONKEY CROWD: OFF"}
+                  {set $moncrowd FALSE}
+                  {$this reset}}})
+         (shell_qui2.btn
+            {set $iamadev TRUE}
+            {ui pop_screen})})
+   (BUTTON_DOWN_MSG
+      {if
+         {== $button kPad_Circle}
+         {ui pop_screen}})}
+#define OVERSHELL_LIST_CONTENTS
+((help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm help_confirm))
+{new_gh_panel
+   overshell_list
+   (clear_vram TRUE)
+   (enter
+      {do
+         {ss_dong.lst set_local_pos 0 0 35}
+         {ss_dong.lst set_data overshell_list_CONTENTS}
+         {$this set_focus ss_dong.lst}})}
+{new_gh_screen
+   overshell_list
+   (panels overshell_list)
+   (focus overshell_list)
+   (clear_vram TRUE)
+   (allow_back FALSE)
+   (animate_transition FALSE)
+   (SELECT_MSG
+      {switch
+         $component
+         (help_confirm
+            {ui pop_screen})})
+   (BUTTON_DOWN_MSG
+      {if
+         {== $button kPad_Start}
+         {ui pop_screen}})}
+#define OVERSHELL_SCREEN_COMMON_HANDLER
+((allow_back FALSE)
+   (animate_transition FALSE))
+#define OVERSHELL_COMMON_BUTTON_DOWN_HANDLER
+((BUTTON_DOWN_MSG
+      {if
+         {&&
+            {!
+               {$this slider_selected}}
+            {== $button kPad_Circle}}
+         {ui pop_screen}}
+      kDataUnhandled))
+#define OVERSHELL_HELP_POP_HANDLER
+({if_else
+      {&&
+         {!
+            {$this slider_selected}}
+         $helpentered}
+      {ui pop_screen}
+      {ui pop_screen}})
+#define SLIDER_LEVELS
+(31)
+#define MODIFIER_SLIDER_HANDLERS
+((focus sd_guitar.sld)
+   (focus_component
+      "")
+   (reset_focus TRUE)
+   (orig_vol 0)
+   (finish_load
+      {sd_band.sld set_num_steps 60}
+      {sd_guitar.sld set_num_steps 31}
+      {sd_sfx.sld set_num_steps 31})
+   (slider_changed
+      {'||'
+         {!=
+            {$this get orig_pos.band}
+            {$this get_slider_volume sd_band.sld}}
+         {!=
+            {$this get orig_pos.guit}
+            {$this get_slider_volume sd_guitar.sld}}
+         {!=
+            {$this get orig_pos.sfx}
+            {$this get_slider_volume sd_sfx.sld}}})
+   (calc_slider_pos
+      ($volume)
+      {int
+         {'+'
+            0.5
+            {'*'
+               $volume
+               {- SLIDER_LEVELS 1}}}})
+   (reset_slider_pos
+      ($slider $volume)
+      {$slider
+         set_selected_pos
+         {$this calc_slider_pos $volume}})
+   (enter
+      {sd_title.lbl set_local_pos 0 0 120}
+      {sd_title.lbl set_local_scale 0.8 0 0.8}
+      {if
+         $towel
+         {$this disable_component sd_guitar.sld}}
+      {sd_band.sld
+         set_selected_pos
+         {int
+            {- $emulatefps 1}}}
+      {sd_guitar.sld
+         set_selected_pos
+         {int
+            {'+'
+               0.5
+               {/
+                  {'+'
+                     {- $trackspd 1}
+                     0.5}
+                  0.1}}}}
+      {sd_sfx.sld
+         set_selected_pos
+         {int
+            {'+'
+               0.5
+               {/
+                  {'+'
+                     {- $speedmod 1}
+                     0.5}
+                  5.0e-2}}}}
+      {$this
+         set
+         orig_pos.band
+         {sd_band.sld selected_pos}}
+      {$this
+         set
+         orig_pos.guit
+         {sd_guitar.sld selected_pos}}
+      {$this
+         set
+         orig_pos.sfx
+         {sd_sfx.sld selected_pos}}
+      {sd_stereo.tog set_state $focusmode}
+      {$this display_speed_msg $trackspd $speedmod $emulatefps})
+   (reset_gm_title
+      {sd_title.lbl set_local_pos 0 0 120}
+      {sd_title.lbl set_local_scale 0.8 0 0.8}
+      {sd_title.lbl set_localized_text GAME_MODIFIER})
+   (display_speed_msg
+      ($tspd $mspd $fps)
+      {if_else
+         $focusmode
+         {do
+            {set $miloskipintro TRUE}
+            {set $skipoutro TRUE}
+            {set $notestreakmod FALSE}
+            {set $sfx FALSE}}
+         {do
+            {set $miloskipintro FALSE}
+            {set $skipoutro FALSE}
+            {set $notestreakmod TRUE}
+            {set $sfx TRUE}}}
+      {sd_title.lbl
+         set_localized_text
+         {sprintf
+            {localize speed_msg}
+            {int
+               {'+'
+                  0.5
+                  {'*' $tspd 100}}}
+            {int
+               {'+'
+                  0.5
+                  {'*' $mspd 100}}}
+            {int $fps}}})
+   (set_speeds
+      {if
+         {$this slider_changed}
+         {do
+            {set
+               $trackspd
+               {-
+                  {'+'
+                     1
+                     {'*'
+                        {sd_guitar.sld selected_pos}
+                        0.1}}
+                  0.5}}
+            {set
+               $speedmod
+               {-
+                  {'+'
+                     1
+                     {'*'
+                        {sd_sfx.sld selected_pos}
+                        5.0e-2}}
+                  0.5}}
+            {set
+               $emulatefps
+               {'+'
+                  1
+                  {sd_band.sld selected_pos}}}
+            {$this display_speed_msg $trackspd $speedmod $emulatefps}}})
+   (GH_CANCEL_MSG
+      {switch
+         $component
+         (sd_guitar.sld
+            {$this
+               reset_slider_pos
+               sd_guitar.sld
+               {$this get orig_vol}})
+         (sd_sfx.sld
+            {$this
+               reset_slider_pos
+               sd_sfx.sld
+               {$this get orig_vol}})
+         (sd_band.sld
+            {$this
+               reset_slider_pos
+               sd_band.sld
+               {$this get orig_vol}})}
+      {$this update_help_display}
+      {$this set_speeds}
+      {$this display_speed_msg $trackspd $speedmod $emulatefps}
+      kDataUnhandled)
+   (get_slider_volume
+      ($slider)
+      {/
+         {$slider selected_pos}
+         {- SLIDER_LEVELS 1}})
+   (FOCUS_MSG
+      {$this set focus_component $new_focus}
+      {$this update_help_display})
+   (update_help_display
+      {if_else
+         {$this slider_selected}
+         {helpbar
+            set_display
+            ((fret1 help_confirm)
+               (fret2 help_cancel)
+               (strum help_adjspd))}
+         {do
+            {if_else
+               {==
+                  {$this get focus_component}
+                  "sd_stereo.btn"}
+               {helpbar
+                  set_display
+                  ((fret1 help_onoff)
+                     (fret2 help_back)
+                     (strum help_updown))}
+               {helpbar
+                  set_display
+                  ((fret1 help_select)
+                     (fret2 help_back)
+                     (strum help_updown))}}}})
+   (SCROLL_START_MSG
+      {do
+         {switch
+            $component
+            (sd_guitar.sld
+               {do
+                  {play_sfx
+                     button_error
+                     (volume 1)
+                     (stop TRUE)}
+                  {$this set_speeds}})
+            (sd_sfx.sld
+               {do
+                  {play_sfx
+                     button_error
+                     (volume 1)
+                     (stop TRUE)}
+                  {$this set_speeds}})
+            (sd_band.sld
+               {do
+                  {play_sfx
+                     button_error
+                     (volume 1)
+                     (stop TRUE)}
+                  {$this set_speeds}})}})
+   (SELECT_MSG
+      {switch
+         $component
+         (sd_guitar.sld
+            {$this
+               set
+               orig_vol
+               {$this get_slider_volume sd_guitar.sld}})
+         (sd_sfx.sld
+            {$this
+               set
+               orig_vol
+               {$this get_slider_volume sd_sfx.sld}})
+         (sd_band.sld
+            {$this
+               set
+               orig_vol
+               {$this get_slider_volume sd_band.sld}})
+         (sd_stereo.btn
+            {sd_stereo.tog toggle}
+            {set
+               $focusmode
+               {sd_stereo.tog get_state}})
+         kDataUnhandled}
+      {$this update_help_display}
+      {$this set_speeds}
+      {$this display_speed_msg $trackspd $speedmod $emulatefps}))
+{new_slider_panel
+   slide_settings
+   (navigator
+      (vertical sd_band.sld sd_guitar.sld sd_sfx.sld sd_stereo.btn))
+   MODIFIER_SLIDER_HANDLERS}
+{new_gh_screen
+   slide_settings
+   (panels slide_settings)
+   (focus slide_settings)
+   OVERSHELL_SCREEN_COMMON_HANDLER
+   OVERSHELL_COMMON_BUTTON_DOWN_HANDLER}
