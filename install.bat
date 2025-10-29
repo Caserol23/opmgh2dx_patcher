@@ -68,8 +68,9 @@ echo.
 :: create menu
 (
 echo @echo off
-echo title OPM Guitar Hero 2 Deluxe Unified Patcher
-echo echo.
+echo mode con: cols=42 lines=20
+echo :mainmenu
+echo title OPMGH2DXU Patcher
 echo echo ==========================================
 echo echo  OPM Guitar Hero 2 Deluxe Unified Patcher
 echo echo             Coded by Caserol23
@@ -80,10 +81,13 @@ echo echo.
 echo echo ==========================================
 echo echo.
 echo echo 0. Exit
+echo echo.
 echo set /p menunum=" > "
-echo if %menunum%=="1" start "%updaterecompile%"
-echo if %menunum%=="0" exit
-) > %scriptbranch%\opmgh2xu.bat
+echo if "%%menunum%%"=="1" start "" "%updaterecompile%"
+echo if "%%menunum%%"=="0" exit
+echo cls
+echo goto mainmenu
+) > %scriptbranch%\opmgh2dxu.bat
 
 :: IML File
 echo Copying Scripts 1/2
@@ -136,10 +140,18 @@ mkdir %buildark%\GEN
 echo Copying Scripts 2/2
 (
 echo @echo off
+echo cls
 echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
 echo cls
 echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image="%ps2dir%\OPMGH2DXU.iso"
 echo pause
+echo exit
 ) > "%updaterecompile%"
-
+copy %scriptbranch%\opmgh2dxu.bat %SystemDrive%%HomePath%\Desktop
+ren %SystemDrive%%HomePath%\Desktop\opmgh2dxu.bat %SystemDrive%%HomePath%\Desktop\OPMGH2DXU.bat
+cls
+echo.
+echo Requirements Installed!
+echo.
 pause
+exit /b
