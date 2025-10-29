@@ -104,7 +104,7 @@ DISCCODE=02
 :: optional scripts
 echo Copying Scripts 2/4
 (
-
+echo test
 ) > "%updaterecompile%"
 
 echo Copying Scripts 3/4
