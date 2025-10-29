@@ -121,7 +121,8 @@ cd %dirset%
 ren "%gitmain%" "%gitout%"
 echo.
 echo :: recompile files
-echo "%arkhelper%" dir2ark "%buildark%" "%arkfoler%" -n MAIN -s 4073741823
+mkdir %buildark%
+echo "%arkhelper%" dir2ark "%buildark%" "%arkfolder%" -n MAIN -s 4073741823
 echo
 ) > "%updaterecompile%"
 
