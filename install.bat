@@ -23,6 +23,8 @@ set buildark=%dirset%\bin\build
 set arkfolder=%dirset%\bin\_ark
 set libs=%dirset%\%gitout%\_lib
 
+echo.
+echo Please avoid much space, uses (_) underscore instead.
 set /p ps2dir="Locate PS2 Folder: "
 rmdir /S /Q %dirset%\%gitout%
 mkdir %dirset%
@@ -51,6 +53,7 @@ echo.
 echo Downloading Resources...
 echo.
 curl -L https://github.com/Caserol23/opmgh2dx_patcher/archive/refs/heads/main.zip --output %meyn%
+cls
 
 :proc
 "%sevenz%" x %meyn% -o"%dirset%" -y
@@ -61,6 +64,26 @@ ren %dirset%\%gitmain% %gitout%
 echo.
 echo Generating Scripts...
 echo.
+
+:: create menu
+(
+echo @echo off
+echo title OPM Guitar Hero 2 Deluxe Unified Patcher
+echo echo.
+echo echo ==========================================
+echo echo  OPM Guitar Hero 2 Deluxe Unified Patcher
+echo echo             Coded by Caserol23
+echo echo ==========================================
+echo echo.
+echo echo 1. Update Patches
+echo echo.
+echo echo ==========================================
+echo echo.
+echo echo 0. Exit
+echo set /p menunum=" > "
+echo if %menunum%=="1" start "%updaterecompile%"
+echo if %menunum%=="0" exit
+) > %scriptbranch%\opmgh2xu.bat
 
 :: IML File
 mkdir %scriptbranch%
@@ -109,33 +132,13 @@ echo 176447   176447   0.0  0   "%scriptbranch%\patch.ims" 598016
 echo [/LOC]
 ) > %buildiml%
 
-:: create menu
-(
-echo @echo off
-echo title OPM Guitar Hero 2 Deluxe Unified Patcher
-echo echo.
-echo echo ==========================================
-echo echo  OPM Guitar Hero 2 Deluxe Unified Patcher
-echo echo             Coded by Caserol23
-echo echo ==========================================
-echo echo.
-echo echo 1. Update Patches
-echo echo.
-echo echo ==========================================
-echo echo.
-echo echo 0. Exit
-echo set /p menunum=" > "
-echo if %menunum%=="1" start "%updaterecompile%"
-echo if %menunum%=="0" exit
-) > %scriptbranch%\opmgh2xu.bat
-
 :: optional scripts
 mkdir %buildark%\GEN
 echo Copying Scripts 2/2
 (
 echo @echo off
 echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
-echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image=%ps2dir%\OPMGH2DXU.iso
+echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image="%ps2dir%\OPMGH2DXU.iso"
 echo pause
 ) > "%updaterecompile%"
 
