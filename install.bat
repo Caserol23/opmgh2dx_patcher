@@ -13,12 +13,12 @@ set meyn=%dirset%\main.zip
 set gitmain=opmgh2dx_patcher-main
 set gitout=bin
 set scriptbranch=%dirset%\%gitout%\_lib\scripts
-set geniml=%scriptbranch%\patch.iml
+set buildiml=%scriptbranch%\patch.iml
 set updaterecompile=%scriptbranch%\update_recompile.bat
 set addcustompatch=%scriptbranch%\addcustom.bat
 set reinstall_patch=%scriptbranch%\reinstall_all.bat
 set arkhelper=%scriptbranch%\tools\arkhelper.exe
-set buildark=%dirset%\bin\build\GEN
+set buildark=%dirset%\bin\build
 set arkfolder=%dirset%\bin\_ark
 set libs=%dirset%\%gitout%
 
@@ -63,7 +63,7 @@ echo.
 
 :: IML File
 mkdir %scriptbranch%
-echo Copying Scripts 1/4
+echo Copying Scripts 1/2
 (
 echo [SYS]
 echo VERSION=1.00
@@ -83,30 +83,30 @@ echo DISCCODE=02
 echo [/CUE]
 echo.
 echo [LOC]
-echo 0        291      0.0  0   "%geniml%\patch.ims"
-echo 292      324      0.0  0   "%geniml%\GEN\MAIN.HDR"
-echo 325      164059   0.0  0   "%geniml%\GEN\MAIN_0.ARK"
-echo 164060   164076   0.0  0   "%geniml%\IOP\CDVDSTM.IRX"
-echo 164077   164211   0.0  0   "%geniml%\IOP\IOPRP300.IMG"
-echo 164212   164236   0.0  0   "%geniml%\IOP\LGAUD.IRX"
-echo 164237   164251   0.0  0   "%geniml%\IOP\LIBSD.IRX"
-echo 164252   164302   0.0  0   "%geniml%\IOP\MCMAN.IRX"
-echo 164303   164306   0.0  0   "%geniml%\IOP\MCSERV.IRX"
-echo 164307   164310   0.0  0   "%geniml%\IOP\MSIFRPC.IRX"
-echo 164311   164316   0.0  0   "%geniml%\IOP\MTAPMAN.IRX"
-echo 164317   164339   0.0  0   "%geniml%\IOP\PADMAN.IRX"
-echo 164340   164340   0.0  0   "%geniml%\IOP\SCRTCHPD.IRX"
-echo 164341   164345   0.0  0   "%geniml%\IOP\SDRDRV.IRX"
-echo 164346   164348   0.0  0   "%geniml%\IOP\SIO2MAN.IRX"
-echo 164349   164416   0.0  0   "%geniml%\IOP\SYNTH_R.IRX"
-echo 164417   164433   0.0  0   "%geniml%\IOP\SYNTH_S.IRX"
-echo 164434   164451   0.0  0   "%geniml%\IOP\USBD.IRX"
-echo 164452   164458   0.0  0   "%geniml%\IOP\USBKB.IRX"
-echo 164459   166204   0.0  0   "%geniml%\OPGH_123.45"
-echo 166205   166205   0.0  0   "%geniml%\SYSTEM.CNF"
-echo 176447   176447   0.0  0   "%geniml%\patch.ims" 598016
+echo 0        291      0.0  0   "%scriptbranch%\patch.ims"
+echo 292      324      0.0  0   "%buildark%\GEN\MAIN.HDR"
+echo 325      164059   0.0  0   "%buildark%\GEN\MAIN_0.ARK"
+echo 164060   164076   0.0  0   "%buildark%\IOP\CDVDSTM.IRX"
+echo 164077   164211   0.0  0   "%buildark%\IOP\IOPRP300.IMG"
+echo 164212   164236   0.0  0   "%buildark%\IOP\LGAUD.IRX"
+echo 164237   164251   0.0  0   "%buildark%\IOP\LIBSD.IRX"
+echo 164252   164302   0.0  0   "%buildark%\IOP\MCMAN.IRX"
+echo 164303   164306   0.0  0   "%buildark%\IOP\MCSERV.IRX"
+echo 164307   164310   0.0  0   "%buildark%\IOP\MSIFRPC.IRX"
+echo 164311   164316   0.0  0   "%buildark%\IOP\MTAPMAN.IRX"
+echo 164317   164339   0.0  0   "%buildark%\IOP\PADMAN.IRX"
+echo 164340   164340   0.0  0   "%buildark%\IOP\SCRTCHPD.IRX"
+echo 164341   164345   0.0  0   "%buildark%\IOP\SDRDRV.IRX"
+echo 164346   164348   0.0  0   "%buildark%\IOP\SIO2MAN.IRX"
+echo 164349   164416   0.0  0   "%buildark%\IOP\SYNTH_R.IRX"
+echo 164417   164433   0.0  0   "%buildark%\IOP\SYNTH_S.IRX"
+echo 164434   164451   0.0  0   "%buildark%\IOP\USBD.IRX"
+echo 164452   164458   0.0  0   "%buildark%\IOP\USBKB.IRX"
+echo 164459   166204   0.0  0   "%buildark%\OPGH_123.45"
+echo 166205   166205   0.0  0   "%buildark%\SYSTEM.CNF"
+echo 176447   176447   0.0  0   "%scriptbranch%\patch.ims" 598016
 echo [/LOC]
-) > %geniml%
+) > %buildiml%
 
 :: create menu
 (
@@ -129,29 +129,9 @@ echo if %menunum%=="0" exit
 ) > %scriptbranch%\opmgh2xu.bat
 
 :: optional scripts
-echo Copying Scripts 2/4
+echo Copying Scripts 2/2
 (
-echo @echo off
-echo :: update files
-echo.
-echo rmdir /S /Q %dirset%
-echo mkdir %dirset%
-echo echo.
-echo Downloading Resources...
-echo echo.
-echo curl -L https://github.com/Caserol23/opmgh2dx_patcher/archive/refs/heads/main.zip --output %dirset%
-"%sevenz%" x %meyn% -o"%dirset%" -y
-cd %dirset%
-ren "%gitmain%" "%gitout%"
-echo.
-echo :: building ARK
-mkdir %buildark%
-echo "%arkhelper%" dir2ark "%buildark%" "%arkfolder%" -n MAIN -s 4073741823
-echo.
-echo :: building ISO
-echo.
-echo cd %libs%
-echo %libs%\python.exe main.py --iml=%geniml% --out_disc_image=%ps2dir%\OPMGH2DXU.iso
+
 ) > "%updaterecompile%"
 
 pause
