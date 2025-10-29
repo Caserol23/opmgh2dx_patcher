@@ -1,7 +1,7 @@
 #include macros.dta
 (system
-   (script
-      #include system_script.dta)
+   (init
+      #include system_init.dta)
    (iop_modules
       (iop/scrtchpd.irx)
       (iop/sio2man.irx)
@@ -21,41 +21,50 @@
       (enabled FALSE)
       (buffer_size 8192)
       (sample_rate k4KHz))
-   (language eng)
-   (fp_exceptions TRUE))
-(debug
-   (console FALSE))
+   (keyboard
+      (disable FALSE))
+   (multitap
+      (disable TRUE))
+   (language)
+   (fp_exceptions TRUE)
+   (main_dir 19997 150000)
+   (dir_sort Tex Mat Font Text Mesh Blur Group Trans OutfitLoader Waypoint CharDriver CharDriverMidi CharClipGroup CharClipSetCallback CharClipSamples)
+   (ng FALSE))
+(objects
+   #include objects.dta)
 (mem
    (heaps
-      #ifdef HX_EE
       (main
          (size 18000000))
       (rnd
          (size 8000000)
-         (handle TRUE))
-      #else
-      (main
-         (size 26000000))
-      #endif)
+         (handle TRUE)))
    (pool
       (big_hunk 3100000)
       (small_hunk 50000))
    (disable_mgr FALSE)
    (enable_tracking FALSE)
    (track_stl FALSE)
-   (check_consistency FALSE))
-(namespaces
-   (main 19997 150000)
-   (rnd 7 60))
+   (check_consistency FALSE)
+   (ps2_clamp_32 TRUE))
 (joypad
    #include joypad.dta)
 (synth
    (build_banks TRUE)
    (use_null_synth FALSE)
+   (mute FALSE)
    (stream_buf_size 1.2)
    (stream_readahead 0)
    (oggvorbis
-      (throttle 0.1))
+      #ifdef HX_XBOX
+      #ifdef _DEBUG
+      (throttle 0.5)
+      #else
+      (throttle 0.1)
+      #endif
+      #else
+      (throttle 0.1)
+      #endif)
    (bank_slots 5)
    (mics 1)
    (iop
@@ -72,7 +81,7 @@
       ('iop/synmic_%.irx'))
    (mic
       (gain 0.1)
-      (volume 0.9)
+      (volume -1)
       (fx TRUE)
       (dma FALSE)
       (compressor TRUE 0.7))
@@ -80,80 +89,29 @@
       (distance_scale 1.0)
       (listener_radius 1.5)
       (sound_speed 250.0)
-      (max_angle_delta 0.4)
-      (global_volume 1.0))
+      (max_angle_delta 0.4))
    (fx
       (chain FALSE)
       (core_0
          (mode kFXModeDelay)
-         (volume 0.2)
+         (volume -15)
          (delay 0.6)
-         (feedback 0.12))
+         (feedback -19))
       (core_1
          (mode kFXModeMedStudio)
-         (volume 0.0)
+         (volume kDbSilence)
          (delay 0.0)
-         (feedback 0.0)))
-   (gc_mic_fx
-      (test_mode FALSE)
-      (delay
-         (enable TRUE)
-         (delay 300)
-         (feedback 20)
-         (level 50))
-      (reverb
-         (enable TRUE)
-         (coloration 1.0)
-         (mix 1.0)
-         (time 1.0)
-         (damping 0.5)
-         (pre_delay 0.0)
-         (crosstalk 0.0)))
+         (feedback kDbSilence)))
    (level_analysis FALSE)
    (metamusic
-      (volume 0.5)
+      (volume -6)
       (fade_rate 1.0)
       (play_from_memory TRUE)
-      (use_rnd_heap FALSE)))
+      (use_rnd_heap FALSE))
+   (scratcher))
+(disable_cheats FALSE)
 (quick_cheats
-   (left
-      #ifdef HX_GC
-      (kPad_DLeft
-         {if
-            {exists camtest_next_shots}
-            {camtest_next_shots}})
-      (kPad_DRight
-         {if
-            {exists camtest_pick_shot}
-            {camtest_pick_shot}})
-      #else
-      (kPad_DLeft
-         {if
-            {exists heap_report}
-            {heap_report}})
-      (kPad_DRight
-         {if
-            {exists heap_dump}
-            {heap_dump}})
-      #endif
-      (kPad_DUp
-         {rnd toggle_overlay rate})
-      (kPad_DDown
-         {rnd toggle_heap})
-      (kPad_Select
-         {rnd screen_dump screendump})
-      (kPad_Circle
-         {rnd toggle_overlay stats})
-      (kPad_X
-         {rnd toggle_timers})
-      (kPad_Square
-         {print_namespaces_space}
-         {print_symbol_space})
-      (kPad_Tri
-         {arena
-            free_camera
-            {!
-               {arena free_camera_active}}}))
+   (left)
    (right)
    (keyboard
       (KB_LEFT
@@ -179,23 +137,17 @@
    (bsp_dir_tol 0.996)
    (bsp_max_candidates 20)
    (bsp_max_depth 40))
-(timer cpu gs)
+(timer task draw 'task+draw' cpu gs light)
 (rnd
-   #ifdef HX_EE
    (width 512)
    (height 448)
-   #else
-   (width 640)
-   (height 480)
-   #endif
    (bpp 16)
    (sync TRUE)
    (guard_band 0 0)
    (title
-      "Sad Little App")
+      "Hmx App")
    (show_timers FALSE)
    (timer_maxms 50)
-   (full_screen FALSE)
    (clear_color 0.3 0.3 0.3)
    (overlays
       (rate
@@ -219,8 +171,8 @@
          (lines 1)
          (showing FALSE)
          (color 0 0 0 0.5))
-      (arena
-         (lines 1)
+      (camera
+         (lines 3)
          (showing FALSE))
       (free_camera
          (lines 1)
@@ -229,23 +181,28 @@
          (lines 1)
          (showing FALSE)))
    (console_buffer 50)
-   (console_trycatch TRUE)
    (shadow_plane 0 0 1 0)
    (limit_uv_range 6)
    (movie_readahead 0)
-   (save_sort Tex Mat Font Text Mesh Blur)
    (font
-      #include rnd_font.dta)
-   (gpu_queue 280000))
+      #include rnd_font.dta))
+(world
+   (free_camera
+      (rotate_rate 1.0e-3)
+      (slew_rate 0.1)
+      (near_far_plane 10 1000)))
 (ui
-   (allowable_groups)
-   (shared_rnd_files)
-   (button_select
-      (num_flashes 2)
-      (frames_selected 50.0)
-      (frames_normal 40.0))
-   (rnd_extension rnd)
-   (use_joypad TRUE))
+   (use_joypad TRUE)
+   (cam
+      (fov 34.516)
+      (y -768)
+      (near 1)
+      (far 1000)
+      (z-range 0 1))
+   (env
+      (ambient 1 1 1))
+   (transition_time 0.5)
+   (min_splash_time 1.0))
 (locale)
 (digimask
    (namespace 400 5000)
@@ -324,3 +281,26 @@
             ((DEFT))
             ((EBRR EBRL)))
          (bones BROL BROR BRIL BRIR))))
+(charsys
+   (CharEyes
+      (camera_max_offset 12)
+      (camera_interval 1920 3840)
+      (forward_distance 80)
+      (forward_max_offset 12)
+      (forward_interval 960 2000)
+      (crowd_interval 960 1920)))
+(audio_analysis
+   (num_slots
+      (2 2 3 4))
+   (slot_offset
+      (1 1 0 0))
+   (gem_density
+      (0.5 0.62 0.75 1.0))
+   (combo_density
+      (0.0 0.0 5.0e-2 0.1))
+   (gems_per_phrase
+      (8 10 12 16))
+   (long_phrase_penalty 0.1)
+   (max_repeated_gem_num 2)
+   (max_repeated_gem_time 1000)
+   (min_combo_spacing 200))

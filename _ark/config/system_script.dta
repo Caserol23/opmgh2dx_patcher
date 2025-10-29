@@ -1,45 +1,42 @@
-#include ../../../system/run/config/system_script.dta
+#include ../../../system/run/config/system_init.dta
 #define FOREVER_PERIOD
-(604800000)
+(604800)
 #define FOREVER_30FPS
 (18144000)
-#define CHEAT_DISPLAY_MS
-(5000)
+#define CHEAT_DISPLAY_S
+(5)
 {func
    animate_forever_30fps
-   ($taskmgr $animatable)
-   {$taskmgr anim_task $animatable FOREVER_PERIOD 0 FOREVER_30FPS}}
+   ($panel $animatable)
+   {{$panel find $animatable}
+      animate
+      (range 0 FOREVER_30FPS)
+      (period FOREVER_PERIOD)
+      (units kTaskUISeconds)}}
+{func
+   game_restart
+   {if_else
+      {==
+         {gamecfg get mode}
+         practice}
+      {practice_restart}
+      {do
+         {game exit}
+         {if
+            {world_panel is_up}
+            {world_panel exit}}
+         {ui
+            goto_screen
+            {gamecfg get game_screen}}}}}
+{func
+   game_restart_fast
+   {game set fast_intro TRUE}
+   {game_restart}}
 {func
    set_all_hud_showing
    ($show)
    {hud set_showing $show}
    {track_panel set_showing $show}}
-{func
-   reset_all_callbacks
-   {with_namespace
-      main
-      {func
-         gem_hit_callback
-         ($slot $hopoable $hopoed)}
-      {func hopo_callback}
-      {func swingAtHopo_callback}
-      {func gem_miss_callback}
-      {func gem_pass_callback}
-      {func
-         held_note_released_callback
-         ($fraction)}
-      {func whammy_start_callback}
-      {func whammy_end_callback}
-      {func star_phrase_miss_callback}
-      {func star_phrase_captured_callback}
-      {func star_gem_hit_callback}
-      {func star_use_begin_callback}
-      {func star_use_end_callback}
-      {func
-         fret_played
-         ($fret_num)}
-      {func hopo_hit}}}
-{reset_all_callbacks}
 {set $camera.stare_at_singer FALSE}
 {func
    autosave_goto
@@ -47,6 +44,8 @@
    {if_else
       {&&
          {campaign needs_save}
+         {!
+            {campaign all_access}}
          $autosave
          {! $disable_save}}
       {do
@@ -60,7 +59,7 @@
    {if_else
       {game multiplayer}
       {elem
-         (-1 1)
+         (-1 1 1)
          $player}
       0}}
 {func
@@ -74,11 +73,11 @@
    play_game_sfx_player
    ($sfx_single $sfx_multi $player)
    {do
-      (($sfx
-            {if_else
-               {game multiplayer}
-               $sfx_multi
-               $sfx_single}))
+      ($sfx
+         {if_else
+            {game multiplayer}
+            $sfx_multi
+            $sfx_single})
       {play_sfx
          $sfx
          (volume
@@ -97,11 +96,11 @@
    play_game_sequence_player
    ($seq_single $seq_multi $player)
    {do
-      (($seq
-            {if_else
-               {game multiplayer}
-               $seq_multi
-               $seq_single}))
+      ($seq
+         {if_else
+            {game multiplayer}
+            $seq_multi
+            $seq_single})
       {synth
          play_sequence
          $seq
@@ -109,4 +108,4 @@
             {options get_fx_volume})
          (pan
             {player_pan $player})}}}
-#include cheats_funcs.dta
+#include debug_funcs.dta

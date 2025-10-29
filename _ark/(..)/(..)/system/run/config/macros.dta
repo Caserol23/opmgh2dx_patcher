@@ -1,9 +1,9 @@
 #ifdef TRUE
 #else
-#define TRUE
-(1)
 #define FALSE
 (0)
+#define TRUE
+(1)
 #define kPlatformNone
 (0)
 #define kPlatformPS2
@@ -14,6 +14,72 @@
 (3)
 #define kPlatformPC
 (4)
+#define kOldGfx
+(0)
+#define kNewGfx
+(1)
+#define kMergeMerge
+(0)
+#define kMergeReplace
+(1)
+#define kMergeKeep
+(2)
+#define kNoInline
+(0)
+#define kAlwaysInline
+(1)
+#define kPrecacheInline
+(2)
+#define kCopyDeep
+(0)
+#define kCopyShallow
+(1)
+#define kCopyFromMax
+(2)
+#define kCopyProxy
+(3)
+#define kTaskSeconds
+(0)
+#define kTaskBeats
+(1)
+#define kTaskUISeconds
+(2)
+#define kTaskTutorialSeconds
+(3)
+#define TASK_UNITS
+(("kTaskSeconds"
+      "kTaskBeats"
+      "kTaskUISeconds"
+      "kTaskTutorialSeconds"))
+#define kSquareAspect
+(0)
+#define kRegularAspect
+(1)
+#define kWidescreenAspect
+(2)
+#define kAnimRange
+(0)
+#define kAnimLoop
+(1)
+#define kAnimShuttle
+(2)
+#define ANIM_ENUM
+(("kAnimRange"
+      "kAnimLoop"
+      "kAnimShuttle"))
+#define k30_fps
+(0)
+#define k480_fpb
+(1)
+#define k30_fps_ui
+(2)
+#define k1_fpb
+(3)
+#define RATE_ENUM
+(("k30_fps"
+      "k480_fpb"
+      "k30_fps_ui"
+      "k1_fpb"))
 #define PI
 (3.1415927)
 #define kFirstFit
@@ -78,6 +144,16 @@
 (0)
 #define kRightAnalog
 (1)
+#define kJoypadNone
+(0)
+#define kJoypadDigital
+(1)
+#define kJoypadAnalog
+(2)
+#define kJoypadDualShock
+(3)
+#define kJoypadMidi
+(4)
 #define KB_ENTER
 (10)
 #define KB_BACKSPACE
@@ -286,11 +362,11 @@
 (0)
 #define kConstraintLocalRotate
 (1)
-#define kConstraintLookAtTarget
+#define kConstraintParentWorld
 (2)
-#define kConstraintShadowTarget
+#define kConstraintLookAtTarget
 (3)
-#define kConstraintMirrorTarget
+#define kConstraintShadowTarget
 (4)
 #define kConstraintBillboardZ
 (5)
@@ -368,22 +444,32 @@
 (24)
 #define kTexRenderedNoZ
 (34)
+#define kLightPoint
+(0)
+#define kLightDirectional
+(1)
 #define kBlendDest
 (0)
 #define kBlendSrc
 (1)
 #define kBlendAdd
 (2)
-#define kBlendMultiply
-(2)
-#define kBlendMultiply2
-(3)
 #define kBlendSrcAlpha
 (3)
 #define kBlendSrcAlphaAdd
 (4)
 #define kBlendSubtract
 (5)
+#define kBlendMultiply
+(6)
+#define BLEND_ENUM
+(("kBlendDest"
+      "kBlendSrc"
+      "kBlendAdd"
+      "kBlendSrcAlpha"
+      "kBlendSrcAlphaAdd"
+      "kBlendSubtract"
+      "kBlendMultiply"))
 #define kZModeDisable
 (0)
 #define kZModeNormal
@@ -394,6 +480,44 @@
 (3)
 #define kZModeDecal
 (4)
+#define ZMODE_ENUM
+(("kZModeDisable"
+      "kZModeNormal"
+      "kZModeTransparent"
+      "kZModeForce"
+      "kZModeDecal"))
+#define kTexWrapClamp
+(0)
+#define kTexWrapRepeat
+(1)
+#define TEXWRAP_ENUM
+(("kTexWrapClamp"
+      "kTexWrapRepeat"))
+#define kTexGenNone
+(0)
+#define kTexGenXfm
+(1)
+#define kTexGenSphere
+(2)
+#define kTexGenProjected
+(3)
+#define kTexGenXfmOrigin
+(4)
+#define kTexGenEnviron
+(5)
+#define TEXGEN_ENUM
+(("kTexGenNone"
+      "kTexGenXfm"
+      "kTexGenSphere"
+      "kTexGenProjected"
+      "kTexGenXfmOrigin"
+      "kTexGenEnviron"))
+#define kRecordRegular
+(0)
+#define kRecordCreated
+(1)
+#define kRecordDeleted
+(2)
 #define BUTTON_DOWN_MSG
 (button_down
    ($button $player_num))
@@ -408,16 +532,16 @@
    ($key $shift $control $alt))
 #define SELECT_MSG
 (component_select
-   ($component $panel $screen $button))
+   ($component))
 #define SELECT_START_MSG
 (component_select_start
-   ($component $panel $screen $player_num))
+   ($component $button $player_num))
 #define FOCUS_MSG
 (component_focus
-   ($new_focus $old_focus $panel $screen))
+   ($new_focus $old_focus $panel_dir))
 #define SCREEN_CHANGE_MSG
 (screen_change
-   ($new_screen $old_screen))
+   ($new_screen $old_screen $back))
 #define TRANSITION_COMPLETE_MSG
 (transition_complete
    ($new_screen $old_screen))
@@ -427,13 +551,16 @@
 #define TEXT_ENTRY_INVALID_MSG
 (text_entry_invalid
    ($component $bad_char $end_of_field))
-#define kGameResultWin0
+#define SCROLL_MSG
+(component_scroll
+   ($component))
+#define kComponentNormal
 (0)
-#define kGameResultWin1
+#define kComponentFocused
 (1)
-#define kGameResultWin
+#define kComponentDisabled
 (2)
-#define kGameResultLose
+#define kComponentSelecting
 (3)
 #define kExcitementBoot
 (0)
@@ -445,48 +572,136 @@
 (3)
 #define kExcitementPeak
 (4)
-#define kEyeInactive
-(0)
-#define kEyeCamera
+#define kNumExcitements
+(5)
+#define kPlayNow
 (1)
-#define kEyeForward
+#define kPlayNoBlend
 (2)
-#define kEyeCrowd
+#define kPlayFirst
 (3)
-#define kAnimReset
-(1)
-#define kAnimNow
-(2)
-#define kAnimFirst
-(3)
-#define kAnimLongest
+#define kPlayLast
 (4)
-#define kAnimModeMask
-(7)
-#define kAnimLoop
-(128)
-#define kAnimGraphLoop
-(256)
-#define kAnimBeatAlign1
-(1)
-#define kAnimBeatAlign2
-(2)
-#define kAnimBeatAlign4
-(4)
-#define kAnimBeatAlign8
+#define kPlayDirty
 (8)
-#define kAnimRealTime
+#define kPlayNoLoop
 (16)
-#define kAnimGCLock
+#define kPlayLoop
 (32)
+#define kPlayGraphLoop
+(48)
+#define kPlayNodeLoop
+(64)
+#define kPlayRealTime
+(512)
+#define kPlayUserTime
+(1024)
+#define kPlayBeatAlign1
+(4096)
+#define kPlayBeatAlign2
+(8192)
+#define kPlayBeatAlign4
+(16384)
+#define kPlayBeatAlign8
+(32768)
+#define kPlayNoDefault
+(0)
+#define kPlayBeatTime
+(0)
+#define PLAY_BLEND_FLAGS
+(("kPlayNoDefault"
+      "kPlayNow"
+      "kPlayDirty"
+      "kPlayNoBlend"
+      "kPlayFirst"
+      "kPlayLast"))
+#define PLAY_LOOP_FLAGS
+(("kPlayNoDefault"
+      "kPlayNoLoop"
+      "kPlayLoop"
+      "kPlayGraphLoop"
+      "kPlayNodeLoop"))
+#define PLAY_TIME_FLAGS
+(("kPlayBeatTime"
+      "kPlayRealTime"
+      "kPlayBeatAlign1"
+      "kPlayBeatAlign2"
+      "kPlayBeatAlign4"
+      "kPlayBeatAlign8"))
+#define kRotNone
+(9)
+#define kRotFull
+(2)
+#define kRotX
+(3)
+#define kRotY
+(4)
+#define kRotZ
+(5)
+#define kCollidePlane
+(0)
+#define kCollideSphere
+(1)
+#define kCollideInsideSphere
+(2)
+#define kCollideCylinder
+(3)
+#define kFaceFxLipSyncRotX
+(0)
+#define kFaceFxLipSyncRotY
+(1)
+#define kFaceFxLipSyncRotZ
+(2)
+#define FACE_FX_LIP_SYNC_OPS
+(("kFaceFxLipSyncRotX"
+      "kFaceFxLipSyncRotY"
+      "kFaceFxLipSyncRotZ"))
+#define kDbSilence
+(-96.0)
 #define STD_EXTS
-(.dtb .seq .mid .bin .acp .acs .acg)
+(.dtb .dtx .seq .mid .bin .acp .acs .acg .fac .voc)
 #define PS2_EXTS
-(_ps2 .nse .bnk .ipu .vgs .icn)
-#define GC_EXTS
-(_gc .gcnse .gcbnk .gcv .ogg .oggmap .icn .bnr)
+(.milo_ps2 .ipu .vgs .icn)
 #define XBOX_EXTS
-(_xbox .xnse .xbnk .xbv .ogg .oggmap)
+(.milo_xbox .xbv .mogg .fx .fx_xbox)
+#define STD_SKIP_DIRS
+(CVS iop test tools)
+#define SYSTEM_SUBDIRS
+("../../system/run/char"
+   "../../system/run/config"
+   "../../system/run/milo"
+   "../../system/run/shaders"
+   "../../system/run/track"
+   "../../system/run/ui"
+   "../../system/run/world")
+#define SYSTEM_DIRS
+("."
+   SYSTEM_SUBDIRS)
 #define XBOX_HD_EXTS
-(.dta .seq .mid .bin .rnd .xnse .xbnk .xbv .ogg .png .png_xbox .bmp .ltf .acs .acg)
+(.dta .seq .mid .bin .milo .xnse .xbnk .xbv .mogg .png .png_xbox .bmp .ltf .acs .acg)
+#define kTriggerNone
+(0)
+#define kTriggerShow
+(1)
+#define kTriggerHide
+(2)
+#define kTriggerEnable
+(3)
+#define kTriggerDisable
+(4)
+#define SYSTEMWORLDEVENTS
+('' start)
+#define WORLDEVENTS
+((SYSTEMWORLDEVENTS))
+#define SYSTEMUIEVENTS
+(ui_enter ui_enter_forward ui_enter_back ui_exit ui_exit_forward ui_exit_back transition_complete)
+#define UIEVENTS
+((SYSTEMUIEVENTS))
+#define HIDE_IN_PROXY
+((hide
+      {!=
+         $this
+         {$this dir}}))
+#define LANGUAGES
+((eng))
 #endif

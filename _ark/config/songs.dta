@@ -1,31 +1,52 @@
-#include ../charsys/band_chars.dta
-(graveyardshift
+(speedtest
    (name
-      "Graveyard Shift")
+      {if_else
+         $game80s
+         "Speed Test (HalfDuck Cover)"
+         "Speed Test"})
    (artist
-      "Unknown")
+      "ExileLord")
+   (caption conceived_by)
    (song
-      (name songs/graveyardshift/graveyardshift)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (name
+         {if_else $game80s songs/speedtesthalfduck/speedtesthalfduck songs/speedtest/speedtest})
+      (tracks
+         ((guitar
+               (2 3))
+            (bass
+               (4 5))
+            (fake 0)))
       (pans
-         (-1.0 1.0 -1.0 1.0))
+         (-1.0 1.0 -1.0 1.0 -1.0 1.0))
       (vols
-         (0.8 0.8 1.0 1.0))
+         (0.0 0.0 0.0 0.0 0.0 0.0))
       (cores
-         (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 162)
+         (-1 -1 1 1 -1 -1))
+      (midi_file
+         {if_else $game80s songs/speedtesthalfduck/speedtesthalfduck.mid songs/speedtest/speedtest.mid}))
+   (song_vs
+      (name
+         {if_else $game80s songs/speedtesthalfduck/speedtesthalfduck songs/speedtest/speedtest})
+      (tracks
+         ((guitar
+               (2 3))
+            (bass
+               (4 5))))
+      (pans
+         (-1.0 1.0 -1.0 1.0 -1.0 1.0))
+      (vols
+         (0.0 0.0 0.0 0.0 0.0 0.0))
+      (cores
+         (-1 -1 1 1 -1 -1))
+      (midi_file
+         {if_else $game80s songs/speedtesthalfduck/speedtesthalfduck.mid songs/speedtest/speedtest.mid}))
    (anim_tempo kTempoFast)
-   (preview 14653 46000)
-   (midi_file songs/graveyardshift/graveyardshift.mid)
+   (preview 58886 77105)
    (quickplay
-      (character metal)
-      (guitar gibson_lespaul)
-      (venue big_club)))
+      (character_outfit metal1)
+      (guitar sg)
+      (venue fest))
+   (band metal_bass metal_drummer metal_keyboard))
 (tutorial102
    (name
       "Basic 2 Playing Notes")
@@ -33,26 +54,23 @@
       "You")
    (song
       (name tutorial/tutorial102)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial102.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial102.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial103
    (name
       "Basic 3 Different Notes")
@@ -60,26 +78,23 @@
       "You")
    (song
       (name tutorial/tutorial103)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial103.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial103.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial104
    (name
       "Basic 4 Durations")
@@ -87,26 +102,23 @@
       "You")
    (song
       (name tutorial/tutorial104)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial104.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial104.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial105
    (name
       "Basic 5 Chords")
@@ -114,26 +126,23 @@
       "You")
    (song
       (name tutorial/tutorial105)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial105.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial105.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial202
    (name
       "StarPower 2 Combos")
@@ -141,26 +150,23 @@
       "You")
    (song
       (name tutorial/tutorial202)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial202.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial202.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial203
    (name
       "StarPower 3 Whammy Bar")
@@ -168,26 +174,23 @@
       "You")
    (song
       (name tutorial/tutorial203)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial203.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial203.mid)
    (quickplay
-      (character nu_metal)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial204
    (name
       "StarPower 4 Wail")
@@ -195,26 +198,23 @@
       "You")
    (song
       (name tutorial/tutorial204)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial204.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial204.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial205
    (name
       "StarPower 5 Hammer-Ons")
@@ -222,26 +222,23 @@
       "You")
    (song
       (name tutorial/tutorial205)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial205.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial205.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))
 (tutorial206
    (name
       "StarPower 6 Pull-Offs")
@@ -249,23 +246,20 @@
       "You")
    (song
       (name tutorial/tutorial206)
-      (tracks 1)
-      (slip_tracks
-         ((2 3)))
+      (tracks
+         ((guitar
+               (2 3))))
       (pans
          (-1.0 1.0 -1.0 1.0))
       (vols
-         (0.5 0.5 0.5 0.5))
+         (-6.0 -6.0 -6.0 -6.0))
       (cores
          (-1 -1 1 1))
-      (solo
-         (riffs standard)))
-   (bank sfx/song_default)
-   (bpm 108)
+      (midi_file tutorial/tutorial206.mid))
    (anim_tempo kTempoMedium)
    (preview 11981 35990)
-   (midi_file tutorial/tutorial206.mid)
    (quickplay
-      (character tutorial)
-      (guitar gibson_sg)
-      (venue small_club)))
+      (character_outfit alterna1)
+      (guitar sg)
+      (venue small2))
+   (validate_ignore TRUE))

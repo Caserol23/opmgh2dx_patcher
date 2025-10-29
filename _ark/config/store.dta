@@ -1,88 +1,202 @@
 (guitar
-   (gibson_es335
-      (price 600))
-   (gibson_xplorer
-      (price 600))
-   (gibson_firebird
-      (price 600))
-   (gibson_lespaul_special
-      (price 600))
-   (gibson_corvus
+   (explorer
       (price 700))
-   (gibson_moderne
+   (lespaul_doublecut
+      (price 850))
+   (firebird
       (price 700))
-   (gibson_eds
-      (price 850)))
+   (epiphone_coronet
+      (price 550))
+   (kramer_vanguard
+      (price 700))
+   (moderne
+      (price 850))
+   (corvus
+      (price 550))
+   (es335
+      (price 850))
+   (kramer_650
+      (price 700))
+   (eds
+      (price 950))
+   (lespaul_doublecut_sticker
+      (price 700))
+   (lespaul_sonex
+      (price 550))
+   (lespaul_marauder
+      (price 550))
+   (epiphone_casino
+      (price 700))
+   (epiphone_sheraton
+      (price 700))
+   (chet_atkins
+      (price 850))
+   (redoctane
+      (price 700))
+   (air_guitar
+      (price 300))
+   #ifndef 2DBUG
+   #ifndef 8DBUG
+   (scythe
+      (price 7000))
+   #endif
+   #endif
+   (fish_reward
+      (price 500))
+   (usa_reward
+      (price 1000))
+   (coffin_reward
+      (price 1000))
+   (viking_reward
+      (price 2000))
+   (snaketapus_reward
+      (price 2000))
+   (eyeball_reward
+      (price 5000))
+   (battleaxe_reward
+      (price 5600))
+   (log_reward
+      (price 8000)))
 (skin
-   (gibson_sg_special
-      (price 150))
-   (gibson_sg_platinum
+   (lp_ebony
       (price 200))
-   (gibson_sg_flame
-      (price 250))
-   (gibson_lespaul_ebony
-      (price 150))
-   (gibson_lespaul_gold
+   (lp_cayenne
       (price 200))
-   (gibson_lespaul_wylde
-      (price 250))
-   (gibson_flying_v_red
-      (price 150))
-   (gibson_flying_v_v2
+   (lp_gold
+      (price 450))
+   (lp_goddessburst
+      (price 450))
+   (lp_acai
+      (price 550))
+   (lp_zakk
+      (price 550))
+   (sg_ebony
       (price 200))
-   (gibson_flying_v_bluecrack
-      (price 250))
-   (gibson_es335_ebony
-      (price 150))
-   (gibson_es335_maple
+   (sg_white
       (price 200))
-   (gibson_es334_cherry
-      (price 250))
-   (gibson_xplorer_white
-      (price 150))
-   (gibson_xplorer_wood
+   (sg_gt
+      (price 450))
+   (sg_flames
+      (price 550))
+   (fv_v2
       (price 200))
-   (gibson_xplorer_sun
-      (price 250))
-   (gibson_firebird_blue
-      (price 150))
-   (gibson_firebird_copper
+   (fv_century
+      (price 450))
+   (fv_red
+      (price 450))
+   (fv_cracked
+      (price 550))
+   (fv_buckethead
+      (price 550))
+   (exp_white
       (price 200))
-   (gibson_firebird_hippie
-      (price 250))
-   (gibson_lespaul_dbl_white
-      (price 150))
-   (gibson_lespaul_dbl_red
+   (exp_nat
+      (price 450))
+   (exp_sun
+      (price 550))
+   (exp_swirl
+      (price 550))
+   (lp_dbl_red
       (price 200))
-   (gibson_lespaul_dbl_custom
-      (price 250))
-   (gibson_corvus_white
-      (price 150))
-   (gibson_corvus_wood
+   (lp_dbl_yellow
       (price 200))
-   (gibson_corvus_snake
-      (price 250))
-   (gibson_moderne_red
-      (price 150))
-   (gibson_moderne_black
+   (lp_dbl_green
+      (price 450))
+   (lp_dbl_resin
+      (price 550))
+   (fb_ebony
       (price 200))
-   (gibson_moderne_dragon
-      (price 250))
-   (gibson_eds_white
-      (price 250)))
+   (fb_blue
+      (price 200))
+   (fb_copper
+      (price 450))
+   (fb_leopard
+      (price 450))
+   (fb_hippie
+      (price 550))
+   (coronet_cherry
+      (price 200))
+   (coronet_burst
+      (price 450))
+   (coronet_green
+      (price 550))
+   (van_yellow
+      (price 200))
+   (mod_ebony
+      (price 200))
+   (mod_cherry
+      (price 450))
+   (mod_dragon
+      (price 550))
+   (cor_white
+      (price 200))
+   (cor_nat
+      (price 450))
+   (cor_snake
+      (price 550))
+   (es_ebony
+      (price 200))
+   (es_cherry
+      (price 450))
+   (650_white
+      (price 450))
+   (eds_white
+      (price 450))
+   (redoctane_white
+      (price 200))
+   (redoctane_pink
+      (price 200))
+   (redoctane_target
+      (price 200))
+   (redoctane_walnut
+      (price 450))
+   (redoctane_yellow
+      (price 450))
+   (redoctane_green
+      (price 450))
+   (redoctane_scott
+      (price 550))
+   (redoctane_jnack
+      (price 550)))
 (song)
 (character
-   (hair_metal
+   (classic
       (price 5000))
+   (funk1
+      (price 5000))
+   #ifndef _SHIP
+   #ifndef _ENCO
+   #ifndef _ONYX
+   #ifndef _MEGA
+   #ifndef GH1RX
    (grim
-      (price 8000)))
+      (price 7000))
+   #endif
+   #endif
+   #endif
+   #endif
+   #endif)
+(outfit
+   (punk2
+      (price 2000))
+   (alterna2
+      (price 2000))
+   (glam2
+      (price 2000))
+   (goth1
+      (price 2000))
+   (metal2
+      (price 2000))
+   (rockabill2
+      (price 2000))
+   (rock1
+      (price 2000))
+   (deathmetal2
+      (price 2000)))
 (video
-   (video1
-      (file wavegroup.pss)
-      (price 350))
-   (video2
-      (file character.pss)
-      (price 325))
    (video3
-      (file venues.pss)
-      (price 325)))
+      (file hmx.pss)
+      (price 900))
+   (video2
+      (file wg.pss)
+      (price 900)))
