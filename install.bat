@@ -13,6 +13,7 @@ set meyn=%dirset%\main.zip
 set gitmain=opmgh2dx_patcher-main
 set gitout=bin
 set scriptbranch=%dirset%\%gitout%\_lib\scripts
+set toolbranch=%dirset%\%gitout%\_lib\tools
 set buildiml=%scriptbranch%\patch.iml
 set updaterecompile=%scriptbranch%\update_recompile.bat
 set addcustompatch=%scriptbranch%\addcustom.bat
@@ -22,8 +23,8 @@ set buildark=%dirset%\bin\build
 set arkfolder=%dirset%\bin\_ark
 set libs=%dirset%\%gitout%
 
-set /p ps2dir="Locate PS2 Folder: "
-
+:: set /p ps2dir="Locate PS2 Folder: "
+rmdir /S /Q %dirset%\%gitout%
 mkdir %dirset%
 cls
 echo.
@@ -54,7 +55,7 @@ curl -L https://github.com/Caserol23/opmgh2dx_patcher/archive/refs/heads/main.zi
 :proc
 "%sevenz%" x %meyn% -o"%dirset%" -y
 cd %dirset%
-ren "%gitmain%" "%gitout%"
+ren %dirset%\%gitmain% %gitout%
 
 :: generating scripts
 echo.
@@ -129,9 +130,12 @@ echo if %menunum%=="0" exit
 ) > %scriptbranch%\opmgh2xu.bat
 
 :: optional scripts
+mkdir %buildark%\GEN
 echo Copying Scripts 2/2
 (
-
+echo @echo off
+echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
+echo pause
 ) > "%updaterecompile%"
 
 pause
