@@ -17,6 +17,9 @@ set geniml=%scriptbranch%\patch.iml
 set updaterecompile=%scriptbranch%\update_recompile.bat
 set addcustompatch=%scriptbranch%\addcustom.bat
 set reinstall_patch=%scriptbranch%\reinstall_all.bat
+set arkhelper=%scriptbranch%\tools\arkhelper.exe
+set buildark=%dirset%\bin\build\GEN
+set arkfolder=%dirset%\bin\_ark
 
 mkdir %dirset%
 cls
@@ -104,7 +107,22 @@ DISCCODE=02
 :: optional scripts
 echo Copying Scripts 2/4
 (
-echo test
+echo @echo off
+echo :: update files
+echo.
+echo rmdir /S /Q %dirset%
+echo mkdir %dirset%
+echo echo.
+echo Downloading Resources...
+echo echo.
+echo curl -L https://github.com/Caserol23/opmgh2dx_patcher/archive/refs/heads/main.zip --output %dirset%
+"%sevenz%" x %meyn% -o"%dirset%" -y
+cd %dirset%
+ren "%gitmain%" "%gitout%"
+echo.
+echo :: recompile files
+echo "%arkhelper%" dir2ark "%buildark%" "%arkfoler%" -n MAIN -s 4073741823
+echo
 ) > "%updaterecompile%"
 
 echo Copying Scripts 3/4
