@@ -21,9 +21,9 @@ set reinstall_patch=%scriptbranch%\reinstall_all.bat
 set arkhelper=%scriptbranch%\tools\arkhelper.exe
 set buildark=%dirset%\bin\build
 set arkfolder=%dirset%\bin\_ark
-set libs=%dirset%\%gitout%
+set libs=%dirset%\%gitout%\_lib
 
-:: set /p ps2dir="Locate PS2 Folder: "
+set /p ps2dir="Locate PS2 Folder: "
 rmdir /S /Q %dirset%\%gitout%
 mkdir %dirset%
 cls
@@ -135,6 +135,7 @@ echo Copying Scripts 2/2
 (
 echo @echo off
 echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
+echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image=%ps2dir%\OPMGH2DXU.iso
 echo pause
 ) > "%updaterecompile%"
 
