@@ -24,7 +24,7 @@ set arkfolder=%dirset%\bin\_ark
 set libs=%dirset%\%gitout%\_lib
 
 echo.
-echo Please avoid much space, uses (_) underscore instead.
+echo Please avoid much space, use "_" underscore instead.
 set /p ps2dir="Locate PS2 Folder: "
 rmdir /S /Q %dirset%\%gitout%
 mkdir %dirset%
@@ -86,7 +86,6 @@ echo if %menunum%=="0" exit
 ) > %scriptbranch%\opmgh2xu.bat
 
 :: IML File
-mkdir %scriptbranch%
 echo Copying Scripts 1/2
 (
 echo [SYS]
@@ -138,6 +137,7 @@ echo Copying Scripts 2/2
 (
 echo @echo off
 echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
+echo cls
 echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image="%ps2dir%\OPMGH2DXU.iso"
 echo pause
 ) > "%updaterecompile%"
