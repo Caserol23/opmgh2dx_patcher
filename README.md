@@ -6,8 +6,8 @@ The whole repository is based on _**batch script**_ uses builtin Windows command
 
 A special thanks and mention this awesome developers to make this happen:
 
-* [MiloHax Team]() - _For Guitar Hero 2 Deluxe_
-* [master801](fo) - _IML2ISO python based_
-* [PikminGuts92]() - _Mackiloha Suite Tools_
-* [AddyMills]() - _dtab_
+* [MiloHax Team](https://github.com/orgs/hmxmilohax) - _For Guitar Hero 2 Deluxe_
+* [master801](https://github.com/master801/iml2iso) - _IML2ISO python based_
+* [PikminGuts92](https://github.com/PikminGuts92/Mackiloha) - _Mackiloha Suite Tools_
+* [AddyMills](https://github.com/AddyMills) - _dtab_
 
