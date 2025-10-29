@@ -117,11 +117,11 @@ echo echo ==========================================
 echo echo  OPM Guitar Hero 2 Deluxe Unified Patcher
 echo echo             Coded by Caserol23
 echo echo ==========================================
-echo.
+echo echo.
 echo echo 1. Update Patch
 echo echo.
 echo echo ==========================================
-echo.
+echo echo.
 echo echo 0. Exit
 echo set /p menunum=" > "
 echo if %menunum%=="1" start "%updaterecompile%"
