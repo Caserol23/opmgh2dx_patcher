@@ -145,7 +145,6 @@ echo curl -L https://github.com/Caserol23/opmgh2dx_patcher/releases/download/son
 echo cls
 echo "%sevenz%" x %TMP%\update.zip -o"%arkfolder%\songs" -y
 echo cls
-echo echo 
 echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
 echo cls
 echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image="%ps2dir%\OPMGH2DXU.iso"

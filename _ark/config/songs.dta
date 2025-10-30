@@ -214,4 +214,4 @@
       (guitar sg)
       (venue small2))
    (validate_ignore TRUE))
-#include ../../../system/run/config/patch.dta
+#include ../../../system/run/config/sng.dta
