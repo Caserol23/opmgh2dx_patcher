@@ -1,5 +1,5 @@
 (songs
-   (battle speedtest))
+   (battle))
 (required_songs
    (kDifficultyEasy 1 1)
    (kDifficultyMedium 1 1)
