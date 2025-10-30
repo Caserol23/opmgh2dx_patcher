@@ -7,7 +7,7 @@ title OPM Guitar Hero 2 Deluxe Unified PS2 - Installer and Patcher
 :: install by default
 
 :: downloading resources
-set dirset=%ALLUSERSPROFILE%
+set dirset=%AppData%
 set sevenz=C:\Program Files\7-Zip\7z.exe
 set meyn=%dirset%\main.zip
 set gitmain=opmgh2dx_patcher-main
