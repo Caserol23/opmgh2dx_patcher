@@ -22,6 +22,8 @@ set arkhelper=%scriptbranch%\tools\arkhelper.exe
 set buildark=%dirset%\bin\build
 set arkfolder=%dirset%\bin\_ark
 set libs=%dirset%\%gitout%\_lib
+set sng=%arkfolder%\(..)\(..)\system\run\config\sng.dta
+set sngstore=%arkfolder%\(..)\(..)\system\run\config\sngpatch.dta
 
 echo.
 echo Please avoid much space, use "_" underscore instead.
@@ -145,6 +147,8 @@ echo curl -L https://github.com/Caserol23/opmgh2dx_patcher/releases/download/son
 echo cls
 echo "%sevenz%" x %TMP%\update.zip -o"%arkfolder%\songs" -y
 echo cls
+echo type %arkfolder%\songs\songdta.txt >> %sng%
+echo type %arkfolder%\songs\songstore.txt >> %sngstore%
 echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
 echo cls
 echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image="%ps2dir%\OPMGH2DXU.iso"
@@ -152,6 +156,7 @@ echo cls
 echo pause
 echo exit
 ) > "%updaterecompile%"
+
 copy %scriptbranch%\opmgh2dxu.bat %SystemDrive%%HomePath%\Desktop
 ren %SystemDrive%%HomePath%\Desktop\opmgh2dxu.bat %SystemDrive%%HomePath%\Desktop\OPMGH2DXU.bat
 cls
