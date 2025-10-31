@@ -159,7 +159,7 @@
    (redoctane_jnack
       (price 550)))
 (song
-	#include ../../../system/run/config/sngpatch.dta)
+	#include ../../../system/run/config/sng.dta)
 (character
    (classic
       (price 5000))

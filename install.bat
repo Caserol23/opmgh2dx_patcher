@@ -42,10 +42,10 @@ if not exist "%sevenz%" (
 	exit /b
 	)
 if exist "%meyn%" (
-	goto proc
+	goto :proc
 	)
 if not exist "%meyn%" (
-	goto mainproc
+	goto :mainproc
 	) else (
 		goto procext
 		)
@@ -56,6 +56,7 @@ echo Downloading Resources...
 echo.
 curl -L https://github.com/Caserol23/opmgh2dx_patcher/archive/refs/heads/main.zip --output %meyn%
 cls
+goto :eof
 
 :proc
 "%sevenz%" x %meyn% -o"%dirset%" -y
@@ -146,7 +147,7 @@ echo cls
 echo curl -L https://github.com/Caserol23/opmgh2dx_patcher/releases/download/song_patch/update.zip --output %TMP%\update.zip
 echo cls
 echo "%sevenz%" x %TMP%\update.zip -o"%arkfolder%\songs" -y
-echo type "%arkfolder%\songs\songdta.txt >> %sng%"
+echo type %arkfolder%\songs\songdta.txt ^>^> %sng%
 echo %toolbranch%\arkhelper.exe dir2ark "%arkfolder%" "%buildark%\GEN" -n MAIN -s 4073741823
 echo %libs%\python.exe %libs%\main.py --iml=%buildiml% --out_disc_image="%ps2dir%\OPMGH2DXU.iso"
 echo cls
