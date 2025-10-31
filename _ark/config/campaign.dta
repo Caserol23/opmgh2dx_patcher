@@ -120,7 +120,7 @@
 #ifndef 8DBUG
 #ifndef GH1RX
 (order
-   (battle speedtest)
+   (battle #include ../../../system/run/config/sngcamp.dta)
    (battle2)
    (small1)
    (small3)
