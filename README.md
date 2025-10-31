@@ -1,5 +1,7 @@
 **-OPM Guitar Hero 2 Deluxe Unified-**
 
+**THIS REPOSITORY IS UNDER DEVELOPMENT**
+
 A Modded version of **"Milohax's GH2DX"** that contains Filipino songs on the game, with patcher that less hassle downloading a full disc.
 
 The whole repository is based on _**batch script**_ uses builtin Windows commands and other 3rd party program
