@@ -1,40 +1,40 @@
-(o1049845979_nanaman_ivofsp
+(lakastama
    (name
-      "Nanaman")
+      "Lakas Tama")
    (artist
       {do
          {set
             $songalbum
-            "Nanaman"}
+            "Tayo Na Sa Paraiso"}
          {set
             $author
             "Caserol23"}
          {set
             $songyear
-            "2025"}
+            "1994"}
          {set
             $songgenre
-            "Funk"}
+            "Rock"}
          {set $songduration 190992}
-         {set $songguitarrank 1}
-         {set $songbassrank 1}
+         {set $songguitarrank 4}
+         {set $songbassrank 4}
          {set $songrhythmrank -1}
-         {set $songdrumrank 1}
+         {set $songdrumrank 5}
          {set
             $songartist
-            "IV of Spades"}}
-      "IV of Spades")
+            "Siakol"}}
+      "Siakol")
    (caption performed_by)
    (song
       (name
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp")
+         "songs/lakastama/lakastama")
       (tracks
          ((guitar
-               (2))
+               (2 3))
             (bass
-               (2))
+               (4 5))
             (drum
-               (2))))
+               (0))))
       (pans
          (-1.0 1.0 0.0))
       (vols
@@ -42,11 +42,11 @@
       (cores
          (-1 -1 -1))
       (midi_file
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+         "songs/lakastama/lakastama.mid")
       (hopo_threshold 170))
    (song_vs
       (name
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp")
+         "songs/lakastama/lakastama")
       (tracks
          ((guitar
                (2))
@@ -59,7 +59,7 @@
       (cores
          (-1 -1 -1))
       (midi_file
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+         "songs/lakastama/lakastama.mid")
       (hopo_threshold 170))
    (anim_tempo kTempoMedium)
    (preview 80496 110496)
@@ -71,12 +71,12 @@
       (100 90 75 60))
    (song_practice_1
       (name
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp_empty")
+         "songs/lakastama/lakastama_p90")
       (tracks
          ((guitar
                (0))
             (bass
-               (0))
+               (1))
             (drum
                (0))))
       (pans
@@ -86,16 +86,16 @@
       (cores
          (-1))
       (midi_file
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+         "songs/lakastama/lakastama.mid")
       (hopo_threshold 170))
    (song_practice_2
       (name
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp_empty")
+         "songs/lakastama/lakastama_p75")
       (tracks
          ((guitar
                (0))
             (bass
-               (0))
+               (1))
             (drum
                (0))))
       (pans
@@ -105,16 +105,16 @@
       (cores
          (-1))
       (midi_file
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+         "songs/lakastama/lakastama.mid")
       (hopo_threshold 170))
    (song_practice_3
       (name
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp_empty")
+         "songs/lakastama/lakastama_p60")
       (tracks
          ((guitar
                (0))
             (bass
-               (0))
+               (1))
             (drum
                (0))))
       (pans
@@ -124,5 +124,5 @@
       (cores
          (-1))
       (midi_file
-         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+         "songs/lakastama/lakastama.mid")
       (hopo_threshold 170)))
