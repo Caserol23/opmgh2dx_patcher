@@ -1,0 +1,128 @@
+(o1049845979_nanaman_ivofsp
+   (name
+      "Nanaman")
+   (artist
+      {do
+         {set
+            $songalbum
+            "Nanaman"}
+         {set
+            $author
+            "Caserol23"}
+         {set
+            $songyear
+            "2025"}
+         {set
+            $songgenre
+            "Funk"}
+         {set $songduration 190992}
+         {set $songguitarrank 1}
+         {set $songbassrank 1}
+         {set $songrhythmrank -1}
+         {set $songdrumrank 1}
+         {set
+            $songartist
+            "IV of Spades"}}
+      "IV of Spades")
+   (caption performed_by)
+   (song
+      (name
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp")
+      (tracks
+         ((guitar
+               (2))
+            (bass
+               (2))
+            (drum
+               (2))))
+      (pans
+         (-1.0 1.0 0.0))
+      (vols
+         (0.0 0.0 0.0))
+      (cores
+         (-1 -1 -1))
+      (midi_file
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+      (hopo_threshold 170))
+   (song_vs
+      (name
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp")
+      (tracks
+         ((guitar
+               (2))
+            (bass
+               (2))))
+      (pans
+         (-1.0 1.0 0.0))
+      (vols
+         (0.0 0.0 0.0))
+      (cores
+         (-1 -1 -1))
+      (midi_file
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+      (hopo_threshold 170))
+   (anim_tempo kTempoMedium)
+   (preview 80496 110496)
+   (quickplay
+      (character_outfit goth2)
+      (guitar sg)
+      (venue fest))
+   (practice_speeds
+      (100 90 75 60))
+   (song_practice_1
+      (name
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp_empty")
+      (tracks
+         ((guitar
+               (0))
+            (bass
+               (0))
+            (drum
+               (0))))
+      (pans
+         (0.0))
+      (vols
+         (0.0))
+      (cores
+         (-1))
+      (midi_file
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+      (hopo_threshold 170))
+   (song_practice_2
+      (name
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp_empty")
+      (tracks
+         ((guitar
+               (0))
+            (bass
+               (0))
+            (drum
+               (0))))
+      (pans
+         (0.0))
+      (vols
+         (0.0))
+      (cores
+         (-1))
+      (midi_file
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+      (hopo_threshold 170))
+   (song_practice_3
+      (name
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp_empty")
+      (tracks
+         ((guitar
+               (0))
+            (bass
+               (0))
+            (drum
+               (0))))
+      (pans
+         (0.0))
+      (vols
+         (0.0))
+      (cores
+         (-1))
+      (midi_file
+         "songs/o1049845979_nanaman_ivofsp/o1049845979_nanaman_ivofsp.mid")
+      (hopo_threshold 170)))
