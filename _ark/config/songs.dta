@@ -263,3 +263,4 @@
       (guitar sg)
       (venue small2))
    (validate_ignore TRUE))
+#include ../../../system/run/config/sng.dta
