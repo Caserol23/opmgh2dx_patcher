@@ -121,7 +121,7 @@
 #ifndef GH1RX
 (order
    (battle #include ../../../system/run/config/sngcamp.dta)
-   (battle2)
+   (battle2 #include ../../../system/run/config/sngcamp2.dta)
    (small1)
    (small3)
    (small2)
