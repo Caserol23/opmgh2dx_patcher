@@ -85,52 +85,6 @@ echo cls
 echo goto mainmenu
 ) > %scriptbranch%\opmgh2dxu.bat
 
-:: IML File
-echo Copying Scripts 1/2
-(
-echo [SYS]
-echo VERSION=1.00
-echo MEDIA=DVD
-echo TARGET=PS2
-echo DISCVERSION=1.00
-echo DATE=2025/10/29-23:10:27
-echo [/SYS]
-echo.
-echo [CUE]
-echo DISCNAME="OPGH-12345                      "
-echo PRODUCER="PLAYSTATION                     "
-echo COPYRIGHT="                                "
-echo CREATIONDATE=20251029
-echo PSTYPE=2
-echo DISCCODE=02
-echo [/CUE]
-echo.
-echo [LOC]
-echo 0        291      0.0  0   "%scriptbranch%\patch.ims"
-echo 292      324      0.0  0   "%buildark%\GEN\MAIN.HDR"
-echo 325      164059   0.0  0   "%buildark%\GEN\MAIN_0.ARK"
-echo 164060   164076   0.0  0   "%buildark%\IOP\CDVDSTM.IRX"
-echo 164077   164211   0.0  0   "%buildark%\IOP\IOPRP300.IMG"
-echo 164212   164236   0.0  0   "%buildark%\IOP\LGAUD.IRX"
-echo 164237   164251   0.0  0   "%buildark%\IOP\LIBSD.IRX"
-echo 164252   164302   0.0  0   "%buildark%\IOP\MCMAN.IRX"
-echo 164303   164306   0.0  0   "%buildark%\IOP\MCSERV.IRX"
-echo 164307   164310   0.0  0   "%buildark%\IOP\MSIFRPC.IRX"
-echo 164311   164316   0.0  0   "%buildark%\IOP\MTAPMAN.IRX"
-echo 164317   164339   0.0  0   "%buildark%\IOP\PADMAN.IRX"
-echo 164340   164340   0.0  0   "%buildark%\IOP\SCRTCHPD.IRX"
-echo 164341   164345   0.0  0   "%buildark%\IOP\SDRDRV.IRX"
-echo 164346   164348   0.0  0   "%buildark%\IOP\SIO2MAN.IRX"
-echo 164349   164416   0.0  0   "%buildark%\IOP\SYNTH_R.IRX"
-echo 164417   164433   0.0  0   "%buildark%\IOP\SYNTH_S.IRX"
-echo 164434   164451   0.0  0   "%buildark%\IOP\USBD.IRX"
-echo 164452   164458   0.0  0   "%buildark%\IOP\USBKB.IRX"
-echo 164459   166204   0.0  0   "%buildark%\OPGH_123.45"
-echo 166205   166205   0.0  0   "%buildark%\SYSTEM.CNF"
-echo 176447   176447   0.0  0   "%scriptbranch%\patch.ims" 598016
-echo [/LOC]
-) > %buildiml%
-
 :: optional scripts
 mkdir %buildark%\GEN
 echo Copying Scripts 2/2
