@@ -56,12 +56,12 @@ echo Downloading Resources...
 echo.
 curl -L https://github.com/Caserol23/opmgh2dx_patcher/archive/refs/heads/main.zip --output %meyn%
 cls
-goto :eof
 
 :proc
 "%sevenz%" x %meyn% -o"%dirset%" -y
 cd %dirset%
 ren %dirset%\%gitmain% %gitout%
+goto :eof
 
 :: generating scripts
 echo.
