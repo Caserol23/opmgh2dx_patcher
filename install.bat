@@ -67,14 +67,14 @@ echo @echo off
 echo mode con: cols=42 lines=20
 echo :mainmenu
 echo title OPMGH2DXU Patcher
-echo echo ==========================================
-echo echo  OPM Guitar Hero 2 Deluxe Unified Patcher
-echo echo             Coded by Caserol23
-echo echo ==========================================
+echo echo ==========================
+echo echo  OPMGH2DX Unified Patcher
+echo echo     Coded by Caserol23
+echo echo ==========================
 echo echo.
 echo echo 1. Update Patches
 echo echo.
-echo echo ==========================================
+echo echo ==========================
 echo echo.
 echo echo 0. Exit
 echo echo.
