@@ -22,8 +22,7 @@ set arkhelper=%scriptbranch%\tools\arkhelper.exe
 set buildark=%dirset%\bin\build
 set arkfolder=%dirset%\bin\_ark
 set libs=%dirset%\%gitout%\_lib
-set sng=%arkfolder%\(..)\(..)\system\run\config\sng.dta
-set sngstore=%arkfolder%\(..)\(..)\system\run\config\sngpatch.dta
+set libtmp=%dirset%\%gitout%\tmp
 
 echo.
 echo Please avoid much space, use "_" underscore instead.
@@ -62,11 +61,6 @@ cls
 cd %dirset%
 ren %dirset%\%gitmain% %gitout%
 goto :eof
-
-:: generating scripts
-echo.
-echo Generating Scripts...
-echo.
 
 :: create menu
 (
@@ -150,7 +144,6 @@ echo cls
 echo pause
 echo exit
 ) > "%updaterecompile%"
-
 copy %scriptbranch%\opmgh2dxu.bat %SystemDrive%%HomePath%\Desktop
 ren %SystemDrive%%HomePath%\Desktop\opmgh2dxu.bat %SystemDrive%%HomePath%\Desktop\OPMGH2DXU.bat
 cls
