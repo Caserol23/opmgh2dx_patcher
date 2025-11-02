@@ -1,9 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "sngdir=%AppData%\bin"
+set "sngdir=%HomeDrive%\bin"
 set "sngarksong=%sngdir%\_ark\songs"
-set "sngarkconfig=%AppData%\_ark\^(..^)\(^..^)\system\run\config"
+set "sngarkconfig=%sngdir%\_ark\^(..^)\(^..^)\system\run\config"
 set "sngarklocale=%sngdir%\_ark\ui\eng"
 set "libstmp=%sngdir%\tmp"
 
@@ -37,7 +37,7 @@ echo copy "%libstmp%\%%~nxA\%%~nxA_p75.vgs" "%%sngfolder%%"
 echo copy "%libstmp%\%%~nxA\%%~nxA_p90.vgs" "%%sngfolder%%"
 
 echo.
-echo findstr /C:"%%~nxA" %%sngdta%% %%sngcampdta%% %%authordta%% >nul
+echo findstr /C:"%%~nxA" %%sngdta%% %%sngcampdta%% %%authordta%% ^>nul
 echo if %%errorlevel%%==0 (
 echo ^ cls
 echo ^ goto :print
@@ -58,7 +58,7 @@ echo goto :eof
 echo :print
 echo echo Error "%%~nxA" has exist, installing ignored
 echo pause
-) > "%%A\auto_created.bat"
+) > "%%A\songp.bat"
 )
 echo.
 echo Done%% Batch files created in all subfolders.
