@@ -1,4 +1,4 @@
-**-OPM Guitar Hero 2 Deluxe Unified-**
+**-OPM Guitar Hero 2 Deluxe-**
 
 **⚠️ THIS REPOSITORY IS UNDER DEVELOPMENT**
 
